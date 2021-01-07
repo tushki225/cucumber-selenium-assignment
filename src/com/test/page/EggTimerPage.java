@@ -105,6 +105,22 @@ public class EggTimerPage extends Setup {
 		}		
 	}
 	
+	//Clicks Common timers if exists
+	public boolean clickTimer(String option) {
+		try {
+			WebElement timerLink=pageRepos.getElementByLinkText(option);
+			if(timerLink!=null) {
+				timerLink.click();
+				return true;
+			}
+			else
+				return false;			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}		
+	}
+	
 	//Verify Timer running and inserts value in HashSet
 	public void verifyTimer(String time) {
 		HashSet<String> timerHashSet= new HashSet<String>();

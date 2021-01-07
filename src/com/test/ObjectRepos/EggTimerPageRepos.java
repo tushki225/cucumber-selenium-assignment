@@ -37,4 +37,12 @@ public class EggTimerPageRepos {
 		}
 		return null;
 	}
+	
+	public WebElement getElementByLinkText(String linkName) {
+		WebElement anchorElem=driver.findElement(By.linkText(linkName));
+		if(anchorElem.isDisplayed())
+			return anchorElem;
+		else
+			return null;
+	}
 }

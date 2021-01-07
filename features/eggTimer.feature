@@ -1,5 +1,6 @@
 Feature: Verification of countdown functionality of EggTimer Website 
-
+	
+	#Task 1
 	Scenario Outline: Egg Timer Page Load successful 
 		Given I open the EggTimer website <url> and launched the application			
 		When I verify the title of the page	
@@ -24,7 +25,19 @@ Feature: Verification of countdown functionality of EggTimer Website
 		| http://e.ggtimer.com/  |	2 dy             |  Disabled   |
 		| http://e.ggtimer.com/  |	2 minute 5       |  Disabled   |
 		| http://e.ggtimer.com/  |	2 minute 5 sec   |  Enabled    |
+		
+	Scenario Outline: Validate common timers 
+		Given I open the EggTimer website <url> and launched the application			
+		When I verify the title of the page	
+		Then I verify Page load is successful
+		When I click common timer <commonTimer>	
+		Then I verify counter <time>	
+		
+		Examples:                  		
+		| url                    |	commonTimer  |	time       |         
+		| http://e.ggtimer.com/  |	/5 minutes   |  5 minutes  |    
 
+	#Task 2
 	Scenario Outline: Specify Timer and validate countdown of the timer 
 		Given I open the EggTimer website <url> and launched the application			
 		Then I verify Page load is successful
@@ -38,7 +51,7 @@ Feature: Verification of countdown functionality of EggTimer Website
 		| http://e.ggtimer.com/  | 70                 |
 #		| http://e.ggtimer.com/  | 2 minutes          |
 #		| http://e.ggtimer.com/  | 2m                 |
+#		| http://e.ggtimer.com/  | 2 minutes 3 second |
 #		| http://e.ggtimer.com/  | 1 hour             |
 #		| http://e.ggtimer.com/  | 1 hour 4 minutes   |
-#		| http://e.ggtimer.com/  | 2 minutes 3 second |
 		

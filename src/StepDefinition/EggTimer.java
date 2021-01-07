@@ -48,6 +48,12 @@ public class EggTimer {
         Assert.assertTrue("Please specify correct time since Start button is disabled..",eggTimerPage.clickStartButton());			
     }	
     
+    @When("^I click common timer (.*)$")					
+    public void clickCommonTimer(String timerOption) throws Throwable{    		
+    	eggTimerPage= new EggTimerPage();
+        Assert.assertTrue("Timer link not present..",eggTimerPage.clickTimer(timerOption));			
+    }
+    
     @And("^I verify counter (.*)$")					
     public void validateTimer(String time) throws Throwable{    		
     	eggTimerPage= new EggTimerPage();

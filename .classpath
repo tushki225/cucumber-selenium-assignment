@@ -14,5 +14,6 @@
 	<classpathentry kind="lib" path="libraries/cucumber/hamcrest-core-1.3.jar"/>
 	<classpathentry kind="lib" path="libraries/cucumber/cucumber-jvm-deps-1.0.3.jar"/>
 	<classpathentry kind="lib" path="libraries/selenium/selenium-server-standalone-3.141.59.jar"/>
+	<classpathentry kind="lib" path="libraries/cucumber/cucumber-html-0.2.2-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
