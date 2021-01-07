@@ -5,11 +5,11 @@ import java.util.Iterator;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebElement;
-
 import com.test.ObjectRepos.EggTimerPageRepos;
 import com.test.config.Setup;
+import com.test.constants.Constants;
 
-//This class corresponds to the Web elements and actions related to EggTimer Page
+//This class corresponds to the Web elements and actions related to EggTimer Page. This class is second step for POM model
 public class EggTimerPage extends Setup {
 	EggTimerPageRepos pageRepos;
 	HashSet<Long> actualTimer= new HashSet<Long>();	
@@ -18,6 +18,7 @@ public class EggTimerPage extends Setup {
 		pageRepos= new EggTimerPageRepos(driver);
 	}
 	
+	//Navigate to particular url
 	public void navigateTo(String url) {
 		try {
 			driver.get(url);
@@ -27,6 +28,7 @@ public class EggTimerPage extends Setup {
 		}		
 	}
 	
+	//Returns Page title
 	public String getPageTitle() {
 		try {
 			String pageTitle= driver.getTitle();
@@ -50,6 +52,7 @@ public class EggTimerPage extends Setup {
 		}		
 	}
 	
+	//Insert timer value in textbox
 	public boolean provideTimer(String time) {
 		try {
 			WebElement timeTxtBox=pageRepos.getTimerTextBoxElement();
@@ -66,6 +69,26 @@ public class EggTimerPage extends Setup {
 		}		
 	}
 	
+	//Validate Start button enabled or disabled
+	public String validateStartBtn() {
+		try {
+			WebElement startBtn=pageRepos.getElementByButtonName("Start");
+			String toolTipValue= startBtn.getAttribute("data-tip");
+			if(toolTipValue.isEmpty()) {
+				return Constants.ENABLED;
+			}
+			else if(!toolTipValue.isEmpty() && toolTipValue.contains(Constants.tootTipValue))
+				return Constants.DISABLED;
+			
+			else
+				return null;							
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}		
+	}
+	
+	//Clicks Start button if enabled
 	public boolean clickStartButton() {
 		try {
 			WebElement startBtn=pageRepos.getElementByButtonName("Start");
@@ -82,11 +105,12 @@ public class EggTimerPage extends Setup {
 		}		
 	}
 	
+	//Verify Timer running and inserts value in HashSet
 	public void verifyTimer(String time) {
 		HashSet<String> timerHashSet= new HashSet<String>();
 		try {
 			String title=driver.getTitle();			
-			while(!title.equals("time expired!")) {
+			while(!Constants.timeExpired.equals(title)) {
 				if(!title.isEmpty())
 					timerHashSet.add(title);				
 				title=driver.getTitle();					
@@ -94,7 +118,6 @@ public class EggTimerPage extends Setup {
 			Thread.sleep(2000);			
 		} 
 		catch (UnhandledAlertException | InterruptedException e) {
-			
 		}
 		finally  {	
 			System.out.println(timerHashSet);
@@ -102,6 +125,7 @@ public class EggTimerPage extends Setup {
 	    } 			
 	}
 	
+	//Converts Generated Hash Set of timer into Hash Set of corresponding seconds
 	private void generateHashSetWithSeconds(HashSet<String> customSet) {
 		Iterator<String> it = customSet.iterator();
 	     while(it.hasNext()){
@@ -112,6 +136,7 @@ public class EggTimerPage extends Setup {
 	     System.out.println(actualTimer);
 	}
 	
+	//Validate timer values
 	public boolean validateTimer(String time) {	
 		if(time.contains("hour") && time.contains("minutes")) {
 			time=String.valueOf((Long.parseLong(time.split(" ")[0])*3600)+Long.parseLong(time.split(" ")[2])*60);
