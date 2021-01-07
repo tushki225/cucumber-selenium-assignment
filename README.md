@@ -33,7 +33,7 @@ Project is created with:
 ## Execution
 To run this project-
 
-1. Right click Runner.java file(Project folder-->src-->TestRunner-->Runner.java) and select JUnit Test.	
+1. Right click Runner.java file(Project folder-->src-->TestRunner-->Runner.java) and select Run As->JUnit Test.	
 2. Observe the execution in Junit View from Eclipse
 3. Reports will be generated at the location- Project folder-->target-->cucumber-reports
 
